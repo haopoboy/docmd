@@ -1,0 +1,4 @@
+spring:
+  profiles: prod
+  banner:
+    location: banner_prod.gif

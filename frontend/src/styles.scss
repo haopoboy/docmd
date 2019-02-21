@@ -1,0 +1,50 @@
+/* You can add global styles to this file, and also import other style files */
+@import "theme.scss";
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+.app-sticky-top {
+  position: sticky;
+  top: 0px;
+  z-index: 2;
+}
+
+.app-sticky-toolbar {
+  position: sticky;
+  top: 15px;
+  z-index: 3;
+  // Given a max width to fix overriding the search input
+  max-width: 125px;
+}
+
+/**
+*  Sticky to the toolbar, and specify the background to 
+*  fix the body over the header.
+*/
+.app-expansion .mat-expansion-panel-header {
+  position: sticky;
+  top: 64px;
+  background-color: inherit;
+  z-index: 1;
+}
+
+/**
+* Enable sticky
+*/
+.app-expansion .mat-expansion-panel {
+  overflow: visible;
+}
+
+/**
+* Fix delay hidden when collapsing 
+*/
+.app-expansion .mat-expansion-panel-body {
+  overflow: hidden;
+}
+
+.mat-fab.app-fixed-right {
+  position: fixed;
+  bottom: 2%;
+  right: 2%;
+  z-index: 2;
+}
