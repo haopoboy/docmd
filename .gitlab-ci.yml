@@ -33,6 +33,7 @@ cache:
   script:
     - node -v
     - npm -v
+    - npm install
     - npm run build --prod
 
 .verify: &verify
