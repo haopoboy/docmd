@@ -1,11 +1,8 @@
 import { Component, Input, OnChanges, OnInit } from "@angular/core";
 import { TdCodeEditorComponent } from "@covalent/code-editor";
 import { Subject } from "rxjs";
-import { debounceTime, distinctUntilChanged } from "rxjs/operators";
-
-export class Doc {
-  constructor(public content = "") {}
-}
+import { debounceTime, distinctUntilChanged, mergeMap } from "rxjs/operators";
+import { Doc, DocumentService } from "../document.service";
 
 @Component({
   selector: "app-document",
@@ -17,7 +14,7 @@ export class DocumentComponent implements OnInit, OnChanges {
   data = new Doc();
   formData = new Doc();
   input$ = new Subject<string>();
-  constructor() {}
+  constructor(private service: DocumentService) {}
 
   ngOnInit() {}
 
@@ -25,10 +22,13 @@ export class DocumentComponent implements OnInit, OnChanges {
     Object.assign(this.formData, this.data);
     this.input$
       .pipe(
-        debounceTime(250),
-        distinctUntilChanged()
+        debounceTime(350),
+        distinctUntilChanged(),
+        mergeMap(() => this.service.post(this.formData))
       )
-      .subscribe(input => (this.data.content = input));
+      .subscribe((saved: any) => {
+        this.data.content = saved.content;
+      });
   }
 
   onEditorChange(editor: TdCodeEditorComponent, event) {

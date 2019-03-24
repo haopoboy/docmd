@@ -16,6 +16,7 @@ import { DocumentRoutingModule } from "./document-routing.module";
 import { DocumentComponent } from "./document/document.component";
 import { DocumentsComponent } from "./documents/documents.component";
 import { ExpansionComponent } from "./expansion/expansion.component";
+import { HttpClientModule } from "@angular/common/http";
 
 @NgModule({
   declarations: [DocumentsComponent, DocumentComponent, ExpansionComponent],
@@ -31,7 +32,8 @@ import { ExpansionComponent } from "./expansion/expansion.component";
     MatMenuModule,
     FlexLayoutModule,
     CovalentCodeEditorModule,
-    MarkdownModule.forRoot()
+    MarkdownModule.forRoot(),
+    HttpClientModule
   ]
 })
 export class DocumentModule {}

@@ -1,5 +1,5 @@
-import { ChangeDetectorRef, Component, OnInit, Input } from "@angular/core";
-import { Doc } from "../document/document.component";
+import { ChangeDetectorRef, Component, Input, OnInit } from "@angular/core";
+import { Doc, DocumentService } from "../document.service";
 
 @Component({
   selector: "app-documents",
@@ -8,13 +8,23 @@ import { Doc } from "../document/document.component";
 })
 export class DocumentsComponent implements OnInit {
   @Input()
-  data: Doc[] = [];
-  constructor(private cdr: ChangeDetectorRef) {}
+  data: any[] = [];
+  constructor(
+    private cdr: ChangeDetectorRef,
+    private service: DocumentService
+  ) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.service.find().subscribe((page: any) => {
+      this.data = page.content;
+      this.cdr.detectChanges();
+    });
+  }
 
-  add(item = new Doc()) {
-    this.data.push(item);
-    this.cdr.detectChanges();
+  add(item?: Doc) {
+    this.service.post(item).subscribe(saved => {
+      this.data.push(saved);
+      this.cdr.detectChanges();
+    });
   }
 }

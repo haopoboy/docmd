@@ -1,7 +1,6 @@
 import { Component, Input, OnInit } from "@angular/core";
 import { UtilService } from "src/app/service/util.service";
-import { DocumentService } from "../document.service";
-import { Doc } from "../document/document.component";
+import { Doc, DocumentService } from "../document.service";
 
 @Component({
   selector: "app-expansion",
@@ -24,7 +23,9 @@ export class ExpansionComponent implements OnInit {
   }
 
   delete(event: Event, row: Doc) {
-    event.stopImmediatePropagation();
-    this.data.splice(this.data.indexOf(row), 1);
+    this.service.delete(row).subscribe(() => {
+      event.stopImmediatePropagation();
+      this.data.splice(this.data.indexOf(row), 1);
+    });
   }
 }

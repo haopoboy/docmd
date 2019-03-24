@@ -1,28 +1,61 @@
 package com.github.haopoboy.docmd.controller
 
+import com.fasterxml.jackson.databind.ObjectMapper
+import com.github.haopoboy.docmd.service.RepositoryService
 import org.springframework.beans.factory.annotation.Autowired
-import org.springframework.data.repository.support.Repositories
-import org.springframework.web.bind.annotation.GetMapping
-import org.springframework.web.bind.annotation.PathVariable
-import org.springframework.web.bind.annotation.RequestMapping
-import org.springframework.web.bind.annotation.RestController
+import org.springframework.data.domain.Pageable
+import org.springframework.data.web.PageableDefault
+import org.springframework.web.bind.annotation.*
 import java.util.*
 
 @RestController
-@RequestMapping("/api/v1")
+@RequestMapping(ApiV1Controller.BASE_URI)
 class ApiV1Controller {
 
-    @Autowired
-    private lateinit var repositories: Repositories
+    companion object {
+        const val BASE_URI = "/api/v1"
+    }
 
     private val nameMappings: Map<String, String> = mapOf("people" to "person")
 
-    @GetMapping("/{name}/{id}")
-    fun get(@PathVariable name: String, @PathVariable id: UUID): String {
-        if (nameMappings.containsKey(name)) {
-            return "${nameMappings[name]}/$id"
-        } else {
-            return "${name}s/$id"
-        }
+    @Autowired
+    private lateinit var repositoryService: RepositoryService
+
+    @Autowired
+    private lateinit var objectMapper: ObjectMapper
+
+    @GetMapping("/{name}")
+    fun find(@PathVariable name: String, @PageableDefault pageable: Pageable): Any {
+        return repositoryService.forEntityName(asEntitySimpleName(name)).findAll(pageable)
     }
+
+    @GetMapping("/{name}/{id}")
+    fun get(@PathVariable name: String, @PathVariable id: UUID): Any {
+        return repositoryService.forEntityName(asEntitySimpleName(name)).findById(id)
+    }
+
+    @PostMapping("/{name}")
+    fun post(@PathVariable name: String, @RequestBody body: Map<String, Object>): Any {
+        val clazz = repositoryService.getEntityClass(name)
+        val obj = objectMapper.convertValue(body, clazz)
+        return repositoryService.forEntityName(name).save(obj)
+    }
+
+    @PutMapping("/{name}")
+    fun put(@PathVariable name: String, @RequestBody body: Map<String, Object>): Any {
+        return post(name, body)
+    }
+
+    @DeleteMapping("/{name}/{id}")
+    fun delete(@PathVariable name: String, @PathVariable id: UUID) {
+        repositoryService.forEntityName(name).deleteById(id)
+    }
+
+    /**
+     * @return singular as simple name of Entity
+     */
+    fun asEntitySimpleName(name: String): String {
+        return "${nameMappings.getOrElse(name) { name.substringBeforeLast("s") }}"
+    }
+
 }
