@@ -34,7 +34,7 @@ cache:
     - node -v
     - npm -v
     - npm install
-    - npm run build --prod
+    - npm run build
 
 .verify: &verify
   stage: test
