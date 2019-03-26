@@ -12,7 +12,6 @@ cache:
   paths:
     - .m2/repository
     - target
-    - frontend/node_modules
 
 .validate: &validate
   stage: build
