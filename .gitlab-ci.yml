@@ -17,13 +17,13 @@ cache:
   stage: build
   script:
     - ./mvnw -v
-    - ./mvnw $MAVEN_CLI_OPTS test-compile
+    - ./mvnw test-compile
     
 .test: &test
   stage: test
   script:
     - ./mvnw -v
-    - ./mvnw $MAVEN_CLI_OPTS test
+    - ./mvnw test
 
 .npm: &npm
   stage: build
