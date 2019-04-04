@@ -26,19 +26,22 @@ class ApiV1Controller {
 
     @GetMapping("/{name}")
     fun find(@PathVariable name: String, @PageableDefault pageable: Pageable): Any {
-        return repositoryService.forEntityName(asEntitySimpleName(name)).findAll(pageable)
+        val entitySimpleName = asEntitySimpleName(name)
+        return repositoryService.forEntityName(entitySimpleName).findAll(pageable)
     }
 
     @GetMapping("/{name}/{id}")
     fun get(@PathVariable name: String, @PathVariable id: UUID): Any {
-        return repositoryService.forEntityName(asEntitySimpleName(name)).findById(id)
+        val entitySimpleName = asEntitySimpleName(name)
+        return repositoryService.forEntityName(entitySimpleName).findById(id)
     }
 
     @PostMapping("/{name}")
     fun post(@PathVariable name: String, @RequestBody body: Map<String, Object>): Any {
-        val clazz = repositoryService.getEntityClass(name)
+        val entitySimpleName = asEntitySimpleName(name)
+        val clazz = repositoryService.getEntityClass(entitySimpleName)
         val obj = objectMapper.convertValue(body, clazz)
-        return repositoryService.forEntityName(name).save(obj)
+        return repositoryService.forEntityName(entitySimpleName).save(obj)
     }
 
     @PutMapping("/{name}")
