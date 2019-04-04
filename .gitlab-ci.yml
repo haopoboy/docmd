@@ -2,18 +2,24 @@ cache:
   paths:
     - .m2/repository
     - target
+    
+variables:
+  M2_HOME: "$CI_PROJECT_DIR/.m2"
+  MAVEN_OPTS: "-Dhttps.protocols=TLSv1.2 -Dorg.slf4j.simpleLogger.log.org.apache.maven.cli.transfer.Slf4jMavenTransferListener=WARN -Dorg.slf4j.simpleLogger.showDateTime=true -Djava.awt.headless=true"
+  MAVEN_CLI_OPTS: "--batch-mode --errors --fail-at-end --show-version"
+
 
 .validate: &validate
   stage: build
   script:
     - ./mvnw -v
-    - ./mvnw clean test-compile -B
+    - ./mvnw clean $MAVEN_CLI_OPTS test-compile
     
 .test: &test
   stage: test
   script:
     - ./mvnw -v
-    - ./mvnw test -B
+    - ./mvnw $MAVEN_CLI_OPTS test
 
 .npm: &npm
   stage: build
