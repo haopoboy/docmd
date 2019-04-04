@@ -15,7 +15,7 @@ cache:
 .validate: &validate
   stage: build
   script:
-    - mvn clean $MAVEN_CLI_OPTS compile
+    - mvn clean $MAVEN_CLI_OPTS tes-compile
     
 .test: &test
   stage: test
