@@ -16,6 +16,7 @@ class RepositoryServiceImpl : RepositoryService {
     private lateinit var entityManager: EntityManager
 
     override fun forEntityName(name: String): JpaRepository<Any, Any> {
+        @Suppress("UNCHECKED_CAST")
         return repositories.getRepositoryFor(getEntityClass(name)).get() as JpaRepository<Any, Any>
     }
 
