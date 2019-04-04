@@ -7,13 +7,13 @@ cache:
   stage: build
   script:
     - ./mvnw -v
-    - ./mvnw clean test-compile
+    - ./mvnw clean test-compile -B
     
 .test: &test
   stage: test
   script:
     - ./mvnw -v
-    - ./mvnw test
+    - ./mvnw test -B
 
 .npm: &npm
   stage: build
