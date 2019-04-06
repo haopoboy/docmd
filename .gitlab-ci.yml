@@ -42,23 +42,36 @@ cache:
     - ls -al target
 
 # Branch name is for the tag of docker image
-.deploy: &deploy
+deploy:
   stage: deploy
+  image: docker:git
+  services:
+    - docker:dind
+  dependencies:
+    - verify:jdk8
+  before_script:
+    - docker login -u "$DOCKER_REGISTRY_USER" -p "$DOCKER_REGISTRY_PASSWORD"
   script:
     - docker build --pull -t "$DOCKER_REGISTRY_IMAGE:$CI_COMMIT_REF_NAME" .
-    - docker push "$DOCKER_REGISTRY_IMAGE:$CI_COMMIT_REF_NAME"
+    - docker push "$DOCKER_REGISTRY_IMAGE:$CI_COMMIT_REF_NAME""
   except:
     - master
 
 # Master is the latest tag of docker image
-.deploy-master: &deploy
+deploy-latest:
   stage: deploy
+  image: docker:git
+  services:
+    - docker:dind
+  dependencies:
+    - verify:jdk8
+  before_script:
+    - docker login -u "$DOCKER_REGISTRY_USER" -p "$DOCKER_REGISTRY_PASSWORD"
   script:
     - docker build --pull -t "$DOCKER_REGISTRY_IMAGE" .
     - docker push "$DOCKER_REGISTRY_IMAGE"
   only:
     - master
-
 
 # Validate using JDK8
 validate:jdk8:
@@ -95,13 +108,3 @@ verify:jdk8:
   dependencies:
     - npm:node8
     
-# Build and deploy jdk8 artifact to Docker Hub
-deploy:jdk8:
-  <<: *deploy
-  image: docker:git
-  services:
-    - docker:dind
-  dependencies:
-    - verify:jdk8
-  before_script:
-    - docker login -u "$DOCKER_REGISTRY_USER" -p "$DOCKER_REGISTRY_PASSWORD"
