@@ -19,7 +19,8 @@ class ApiV1ControllerTests {
 
     @Test
     fun get() {
-        val body = testRestTemplate.getForObject("$baseUrl/people", String::class.java)
-        assertThat(body).isEqualTo("[]")
+        val page = testRestTemplate.getForObject("$baseUrl/people", Map::class.java)
+        assertThat(page["content"] as List<Any>).isEmpty()
+
     }
 }

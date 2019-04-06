@@ -37,7 +37,7 @@ class ApiV1Controller {
     }
 
     @PostMapping("/{name}")
-    fun post(@PathVariable name: String, @RequestBody body: Map<String, Object>): Any {
+    fun post(@PathVariable name: String, @RequestBody body: Map<String, Any>): Any {
         val entitySimpleName = asEntitySimpleName(name)
         val clazz = repositoryService.getEntityClass(entitySimpleName)
         val obj = objectMapper.convertValue(body, clazz)
@@ -45,7 +45,7 @@ class ApiV1Controller {
     }
 
     @PutMapping("/{name}")
-    fun put(@PathVariable name: String, @RequestBody body: Map<String, Object>): Any {
+    fun put(@PathVariable name: String, @RequestBody body: Map<String, Any>): Any {
         return post(name, body)
     }
 
