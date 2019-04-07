@@ -37,9 +37,8 @@ cache:
 .verify: &verify
   stage: test
   script:
-    - ./mvnw -v
     - ls -al frontend
-    - ls -al target
+    - mvn $MAVEN_CLI_OPTS verify
 
 # Branch name is for the tag of docker image
 deploy:
@@ -101,7 +100,7 @@ verify:jdk8:
   image: maven:3.5-jdk-8-alpine
   artifacts:
     paths:
-      - target/package.log
+      - target/*.jar
     expire_in: 1 week
   dependencies:
     - npm:node8
