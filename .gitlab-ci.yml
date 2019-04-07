@@ -50,7 +50,7 @@ deploy:
   dependencies:
     - verify:jdk8
   before_script:
-    - echo "$DOCKER_REGISTRY_PASSWORD" | docker login --username "$DOCKER_REGISTRY_USER" --password-stdin
+    - echo "$DOCKER_REGISTRY_PASSWORD" | docker login -u "$DOCKER_REGISTRY_USER" --password-stdin
   script:
     - docker build --pull -t "$DOCKER_REGISTRY_IMAGE:$CI_COMMIT_REF_NAME" .
     - docker push "$DOCKER_REGISTRY_IMAGE:$CI_COMMIT_REF_NAME""
@@ -66,7 +66,7 @@ deploy-latest:
   dependencies:
     - verify:jdk8
   before_script:
-    - echo "$DOCKER_REGISTRY_PASSWORD" | docker login --username "$DOCKER_REGISTRY_USER" --password-stdin
+    - echo "$DOCKER_REGISTRY_PASSWORD" | docker login -u "$DOCKER_REGISTRY_USER" --password-stdin
   script:
     - docker build --pull -t "$DOCKER_REGISTRY_IMAGE" .
     - docker push "$DOCKER_REGISTRY_IMAGE"
