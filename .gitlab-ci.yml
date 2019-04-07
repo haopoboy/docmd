@@ -49,10 +49,6 @@ deploy:
     - docker:dind
   dependencies:
     - verify:jdk8
-  before_script:
-    - echo "$DOCKER_REGISTRY_PASSWORD" | docker login -u "$DOCKER_REGISTRY_USER" --password-stdin
-  after_script:
-    - docker logout
   script:
     - mvn $MAVEN_CLI_OPTS com.google.cloud.tools:jib-maven-plugin:1.0.2:build -Dimage="$DOCKER_REGISTRY_IMAGE:$CI_COMMIT_REF_NAME"
   except:
