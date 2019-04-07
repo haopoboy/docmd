@@ -54,8 +54,7 @@ deploy:
   after_script:
     - docker logout
   script:
-    - docker build --pull -t "$DOCKER_REGISTRY_IMAGE:$CI_COMMIT_REF_NAME" .
-    - docker push "$DOCKER_REGISTRY_IMAGE:$CI_COMMIT_REF_NAME""
+    - mvn $MAVEN_CLI_OPTS com.google.cloud.tools:jib-maven-plugin:1.0.2:build -Dimage="$DOCKER_REGISTRY_IMAGE:$CI_COMMIT_REF_NAME"
   except:
     - master
 
