@@ -66,13 +66,12 @@ deploy-latest:
     - docker:dind
   dependencies:
     - verify:jdk8
-  before_script:
-    - echo "$DOCKER_REGISTRY_PASSWORD" | docker login -u "$DOCKER_REGISTRY_USER" --password-stdin
-  after_script:
-    - docker logout
   script:
-    - docker build --pull -t "$DOCKER_REGISTRY_IMAGE" .
-    - docker push "$DOCKER_REGISTRY_IMAGE"
+    - >
+      mvn $MAVEN_CLI_OPTS com.google.cloud.tools:jib-maven-plugin:1.0.2:build
+      -Dimage="$DOCKER_REGISTRY_IMAGE"
+      -Djib.to.auth.username="${DOCKER_REGISTRY_USER}"
+      -Djib.to.auth.password="${DOCKER_REGISTRY_PASSWORD}"
   only:
     - master
 
