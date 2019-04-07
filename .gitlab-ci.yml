@@ -50,7 +50,11 @@ deploy:
   dependencies:
     - verify:jdk8
   script:
-    - mvn $MAVEN_CLI_OPTS com.google.cloud.tools:jib-maven-plugin:1.0.2:build -Dimage="$DOCKER_REGISTRY_IMAGE:$CI_COMMIT_REF_NAME"
+    - >
+      mvn $MAVEN_CLI_OPTS com.google.cloud.tools:jib-maven-plugin:1.0.2:build
+      -Dimage="$DOCKER_REGISTRY_IMAGE:$CI_COMMIT_REF_NAME"
+      -Djib.to.auth.username="${DOCKER_REGISTRY_USER}"
+      -Djib.to.auth.password="${DOCKER_REGISTRY_PASSWORD}"
   except:
     - master
 
