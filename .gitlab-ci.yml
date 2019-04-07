@@ -44,9 +44,7 @@ cache:
 # Branch name is for the tag of docker image
 deploy:
   stage: deploy
-  image: docker:git
-  services:
-    - docker:dind
+  image: maven:3.5-jdk-8-alpine
   dependencies:
     - verify:jdk8
   before_script:
