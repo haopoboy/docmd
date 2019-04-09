@@ -38,7 +38,7 @@ cache:
   stage: test
   script:
     - ls -al frontend
-    - mvn $MAVEN_CLI_OPTS verify
+    - mvn $MAVEN_CLI_OPTS verify -DskipTests
 
 # Branch name is for the tag of docker image
 deploy:
