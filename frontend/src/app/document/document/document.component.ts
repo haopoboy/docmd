@@ -34,13 +34,4 @@ export class DocumentComponent implements OnInit, OnChanges {
   onEditorChange(editor: TdCodeEditorComponent, event) {
     this.input$.next(this.formData.content);
   }
-
-  // updateEditorHeight(editor: TdCodeEditorComponent) {
-  //   let heightByLines = this.countLines(editor.value) * 19;
-  //   if (heightByLines < 500) {
-  //     heightByLines = 500;
-  //   }
-  //   editor._editorContainer.nativeElement.style.height = `${heightByLines}px`;
-  //   editor.layout();
-  // }
 }
