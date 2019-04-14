@@ -48,7 +48,7 @@ deploy:
   dependencies:
     - npm:node8
   script:
-    - ls target/classes/static/
+    - cat target/classes/static/index.html
     - cp -r frontend/dist/* src/main/resources/static/
     - >
       mvn $MAVEN_CLI_OPTS com.google.cloud.tools:jib-maven-plugin:1.0.2:build
