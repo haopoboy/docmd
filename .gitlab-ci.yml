@@ -38,7 +38,7 @@ cache:
 .verify: &verify
   stage: test
   script:
-    - cp -r frontend/dist/* target/classes/static/
+    - cp -r frontend/dist/* src/main/resources/static/
     - mvn $MAVEN_CLI_OPTS verify -DskipTests
 
 # Branch name is for the tag of docker image
