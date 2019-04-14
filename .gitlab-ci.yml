@@ -48,8 +48,6 @@ deploy:
   dependencies:
     - npm:node8
   script:
-    - cat target/classes/static/index.html
-    - cp -r frontend/dist/* src/main/resources/static/
     - >
       mvn $MAVEN_CLI_OPTS com.google.cloud.tools:jib-maven-plugin:1.0.2:build
       -Dimage="$DOCKER_REGISTRY_IMAGE:$CI_COMMIT_REF_NAME"
@@ -65,7 +63,6 @@ deploy-latest:
   dependencies:
     - npm:node8
   script:
-    - cp -r frontend/dist/* src/main/resources/static/
     - >
       mvn $MAVEN_CLI_OPTS com.google.cloud.tools:jib-maven-plugin:1.0.2:build
       -Dimage="$DOCKER_REGISTRY_IMAGE"
