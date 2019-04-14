@@ -23,7 +23,7 @@ cache:
     - npm -v
     - npm install
     - npm run lint
-    - npm run build --prod
+    - npm run build -- --prod
     
 .test: &test
   stage: test
