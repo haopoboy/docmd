@@ -46,8 +46,10 @@ deploy:
   stage: deploy
   image: maven:3.5-jdk-8-alpine
   dependencies:
-    - verify:jdk8
+    - npm:node8
   script:
+    - ls target/classes/static/
+    - cp -r frontend/dist/* src/main/resources/static/
     - >
       mvn $MAVEN_CLI_OPTS com.google.cloud.tools:jib-maven-plugin:1.0.2:build
       -Dimage="$DOCKER_REGISTRY_IMAGE:$CI_COMMIT_REF_NAME"
@@ -61,8 +63,9 @@ deploy-latest:
   stage: deploy
   image: maven:3.5-jdk-8-alpine
   dependencies:
-    - verify:jdk8
+    - npm:node8
   script:
+    - cp -r frontend/dist/* src/main/resources/static/
     - >
       mvn $MAVEN_CLI_OPTS com.google.cloud.tools:jib-maven-plugin:1.0.2:build
       -Dimage="$DOCKER_REGISTRY_IMAGE"
