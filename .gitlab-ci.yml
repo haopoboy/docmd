@@ -50,7 +50,7 @@ deploy:
   script:
     - cp -r frontend/dist/* src/main/resources/static/
     - >
-      mvn $MAVEN_CLI_OPTS com.google.cloud.tools:jib-maven-plugin:1.0.2:build
+      mvn $MAVEN_CLI_OPTS compile com.google.cloud.tools:jib-maven-plugin:1.0.2:build
       -Dimage="$DOCKER_REGISTRY_IMAGE:$CI_COMMIT_REF_NAME"
       -Djib.to.auth.username="${DOCKER_REGISTRY_USER}"
       -Djib.to.auth.password="${DOCKER_REGISTRY_PASSWORD}"
@@ -66,7 +66,7 @@ deploy-latest:
   script:
     - cp -r frontend/dist/* src/main/resources/static/
     - >
-      mvn $MAVEN_CLI_OPTS com.google.cloud.tools:jib-maven-plugin:1.0.2:build
+      mvn $MAVEN_CLI_OPTS compile com.google.cloud.tools:jib-maven-plugin:1.0.2:build
       -Dimage="$DOCKER_REGISTRY_IMAGE"
       -Djib.to.auth.username="${DOCKER_REGISTRY_USER}"
       -Djib.to.auth.password="${DOCKER_REGISTRY_PASSWORD}"
