@@ -9,7 +9,8 @@ import {
   MatExpansionModule,
   MatGridListModule,
   MatIconModule,
-  MatMenuModule
+  MatMenuModule,
+  MatTooltipModule
 } from "@angular/material";
 import { MarkdownModule } from "ngx-markdown";
 import { MonacoEditorModule } from "ngx-monaco-editor";
@@ -36,6 +37,7 @@ import { PostComponent } from "./post/post.component";
     MatIconModule,
     MatExpansionModule,
     MatMenuModule,
+    MatTooltipModule,
     FlexLayoutModule,
     MarkdownModule.forRoot(),
     MonacoEditorModule.forRoot(),

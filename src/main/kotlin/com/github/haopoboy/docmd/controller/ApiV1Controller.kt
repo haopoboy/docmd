@@ -58,7 +58,7 @@ class ApiV1Controller {
      * @return singular as simple name of entity
      */
     fun asEntitySimpleName(name: String): String {
-        return "${nameMappings.getOrElse(name) { name.substringBeforeLast("s") }}"
+        return "${nameMappings.getOrElse(name) { """s$""".toRegex().replace(name, "") }}"
     }
 
 }

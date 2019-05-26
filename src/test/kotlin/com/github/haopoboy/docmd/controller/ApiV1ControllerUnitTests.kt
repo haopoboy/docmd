@@ -85,6 +85,7 @@ class ApiV1ControllerUnitTests {
     fun asEntitySimpleName() {
         assertThat(impl.asEntitySimpleName("people")).isEqualTo("person")
         assertThat(impl.asEntitySimpleName("documents")).isEqualTo("document")
+        assertThat(impl.asEntitySimpleName("posts")).isEqualTo("post")
     }
 
     private fun given(): Person {
