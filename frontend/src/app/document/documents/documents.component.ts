@@ -15,7 +15,7 @@ export class DocumentsComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.service.find().subscribe((page: any) => {
+    this.service.findAll().subscribe((page: any) => {
       this.data = page.content;
       this.cdr.detectChanges();
     });

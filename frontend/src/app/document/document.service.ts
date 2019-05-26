@@ -14,7 +14,7 @@ export class Doc {
 export class DocumentService {
   constructor(private markdown: MarkdownService, private http: HttpClient) {}
 
-  find(): Observable<any> {
+  findAll(): Observable<any> {
     return this.http.get(`${environment.apiBaseUri}/v1/documents`);
   }
 
