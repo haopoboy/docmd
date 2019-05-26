@@ -1,5 +1,6 @@
 import { async, ComponentFixture, TestBed } from "@angular/core/testing";
-
+import { RouterModule } from "@angular/router";
+import { DocumentModule } from "../document.module";
 import { PostComponent } from "./post.component";
 
 describe("PostComponent", () => {
@@ -8,9 +9,8 @@ describe("PostComponent", () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ PostComponent ]
-    })
-    .compileComponents();
+      imports: [DocumentModule, RouterModule.forRoot([])]
+    }).compileComponents();
   }));
 
   beforeEach(() => {
