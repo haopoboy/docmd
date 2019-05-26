@@ -55,7 +55,7 @@ class ApiV1Controller {
     }
 
     /**
-     * @return singular as simple name of Entity
+     * @return singular as simple name of entity
      */
     fun asEntitySimpleName(name: String): String {
         return "${nameMappings.getOrElse(name) { name.substringBeforeLast("s") }}"
