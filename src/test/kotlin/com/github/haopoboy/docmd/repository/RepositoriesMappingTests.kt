@@ -9,9 +9,11 @@ import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.data.jpa.repository.JpaRepository
 import org.springframework.data.repository.support.Repositories
 import org.springframework.test.context.junit4.SpringRunner
+import javax.transaction.Transactional
 
 @RunWith(SpringRunner::class)
 @SpringBootTest
+@Transactional
 class RepositoriesMappingTests {
 
     @Autowired
