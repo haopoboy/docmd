@@ -1,4 +1,5 @@
 import { CommonModule } from "@angular/common";
+import { HttpClientModule } from "@angular/common/http";
 import { NgModule } from "@angular/core";
 import { FlexLayoutModule } from "@angular/flex-layout";
 import { FormsModule } from "@angular/forms";
@@ -10,16 +11,21 @@ import {
   MatIconModule,
   MatMenuModule
 } from "@angular/material";
-import { CovalentCodeEditorModule } from "@covalent/code-editor";
 import { MarkdownModule } from "ngx-markdown";
+import { MonacoEditorModule } from "ngx-monaco-editor";
 import { DocumentRoutingModule } from "./document-routing.module";
 import { DocumentComponent } from "./document/document.component";
 import { DocumentsComponent } from "./documents/documents.component";
 import { ExpansionComponent } from "./expansion/expansion.component";
-import { HttpClientModule } from "@angular/common/http";
+import { PostComponent } from "./post/post.component";
 
 @NgModule({
-  declarations: [DocumentsComponent, DocumentComponent, ExpansionComponent],
+  declarations: [
+    DocumentsComponent,
+    DocumentComponent,
+    ExpansionComponent,
+    PostComponent
+  ],
   imports: [
     CommonModule,
     DocumentRoutingModule,
@@ -31,8 +37,8 @@ import { HttpClientModule } from "@angular/common/http";
     MatExpansionModule,
     MatMenuModule,
     FlexLayoutModule,
-    CovalentCodeEditorModule,
     MarkdownModule.forRoot(),
+    MonacoEditorModule.forRoot(),
     HttpClientModule
   ]
 })
