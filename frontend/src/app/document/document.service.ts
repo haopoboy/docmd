@@ -14,7 +14,11 @@ export class Doc {
 export class DocumentService {
   constructor(private markdown: MarkdownService, private http: HttpClient) {}
 
-  find(): Observable<any> {
+  findOne(id: string): Observable<any> {
+    return this.http.get(`${environment.apiBaseUri}/v1/document/${id}`);
+  }
+
+  findAll(): Observable<any> {
     return this.http.get(`${environment.apiBaseUri}/v1/documents`);
   }
 
@@ -26,6 +30,14 @@ export class DocumentService {
     return this.http.delete(
       `${environment.apiBaseUri}/v1/document/${doc.uuid}`
     );
+  }
+
+  publish(doc = new Doc()): Observable<any> {
+    return this.http.post(`${environment.apiBaseUri}/v1/post`, doc);
+  }
+
+  findPostById(id: string): Observable<any> {
+    return this.http.get(`${environment.apiBaseUri}/v1/post/${id}`);
   }
 
   getHeader(content = ""): string {

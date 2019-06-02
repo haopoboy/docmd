@@ -1,3 +1,4 @@
+import { HttpClientModule } from "@angular/common/http";
 import { TestBed } from "@angular/core/testing";
 import { MarkdownService, MarkedOptions } from "ngx-markdown";
 import { DocumentService } from "./document.service";
@@ -5,6 +6,7 @@ import { DocumentService } from "./document.service";
 describe("DocumentService", () => {
   beforeEach(() =>
     TestBed.configureTestingModule({
+      imports: [HttpClientModule],
       providers: [MarkedOptions, MarkdownService]
     })
   );

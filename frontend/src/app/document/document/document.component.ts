@@ -1,5 +1,4 @@
 import { Component, Input, OnChanges, OnInit } from "@angular/core";
-import { TdCodeEditorComponent } from "@covalent/code-editor";
 import { Subject } from "rxjs";
 import { debounceTime, distinctUntilChanged, mergeMap } from "rxjs/operators";
 import { Doc, DocumentService } from "../document.service";
@@ -14,6 +13,11 @@ export class DocumentComponent implements OnInit, OnChanges {
   data = new Doc();
   formData = new Doc();
   input$ = new Subject<string>();
+  options = {
+    theme: "vs-dark",
+    language: "markdown",
+    readonly: true
+  };
   constructor(private service: DocumentService) {}
 
   ngOnInit() {}
@@ -31,7 +35,7 @@ export class DocumentComponent implements OnInit, OnChanges {
       });
   }
 
-  onEditorChange(editor: TdCodeEditorComponent, event) {
+  onEditorChange(event) {
     this.input$.next(this.formData.content);
   }
 }

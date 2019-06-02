@@ -1,6 +1,6 @@
 <div fxLayoutGap="15px">
-  <td-code-editor #editor fxFlex style="height: 500px" theme="vs-dark" language="markdown"
-    (change)="onEditorChange(editor, $event)" [(ngModel)]="formData.content">
-  </td-code-editor>
+  <ngx-monaco-editor fxFlex style="height: 500px" [options]="options" [(ngModel)]="formData.content"
+    (ngModelChange)="onEditorChange($event)">
+  </ngx-monaco-editor>
   <markdown fxFlex [data]="formData.content"></markdown>
 </div>
