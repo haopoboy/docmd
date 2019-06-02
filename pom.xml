@@ -9,7 +9,7 @@
     <version>2.1.5.RELEASE</version>
     <relativePath/> <!-- lookup parent from repository -->
   </parent>
-  <groupId>com.github.haopoboy</groupId>
+  <groupId>io.github.haopoboy</groupId>
   <artifactId>docmd</artifactId>
   <version>0.0.1-SNAPSHOT</version>
   <name>docmd</name>
