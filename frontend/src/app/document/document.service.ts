@@ -3,6 +3,7 @@ import { Injectable } from "@angular/core";
 import { MarkdownService } from "ngx-markdown";
 import { Observable } from "rxjs";
 import { environment } from "src/environments/environment";
+import { isString } from "util";
 
 export class Doc {
   constructor(public uuid = "", public content = "") {}
@@ -59,5 +60,18 @@ export class DocumentService {
 
   countLines(content = "") {
     return content.split(/\r\n|\r|\n/).length;
+  }
+
+  extractHeaders(content = ""): String[] {
+    const headers = [];
+    const regexp = /#{1,6}(?!#)(.*)/gm;
+    let match = regexp.exec(content);
+    while (match != null) {
+      if (isString(match[1])) {
+        headers.push(match[1].trim());
+      }
+      match = regexp.exec(content);
+    }
+    return headers;
   }
 }

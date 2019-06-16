@@ -2,5 +2,13 @@
   <ngx-monaco-editor fxFlex style="height: 500px" [options]="options" [(ngModel)]="formData.content"
     (ngModelChange)="onEditorChange($event)">
   </ngx-monaco-editor>
-  <markdown fxFlex [data]="formData.content"></markdown>
+  <div fxFlex fxLayout="row" fxLayoutGap="15px">
+    <mat-card>
+      <h2>Outline</h2>
+      <mat-card-content fxLayout="column">
+        <a *ngFor="let header of headers">{{header}}</a>
+      </mat-card-content>
+    </mat-card>
+    <markdown [data]="formData.content"></markdown>
+  </div>
 </div>

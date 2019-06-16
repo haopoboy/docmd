@@ -1,4 +1,10 @@
-import { Component, Input, OnChanges, OnInit } from "@angular/core";
+import {
+  ChangeDetectorRef,
+  Component,
+  Input,
+  OnChanges,
+  OnInit
+} from "@angular/core";
 import { Subject } from "rxjs";
 import { debounceTime, distinctUntilChanged, mergeMap } from "rxjs/operators";
 import { Doc, DocumentService } from "../document.service";
@@ -18,12 +24,18 @@ export class DocumentComponent implements OnInit, OnChanges {
     language: "markdown",
     readonly: true
   };
-  constructor(private service: DocumentService) {}
+
+  headers = [];
+  constructor(
+    private service: DocumentService,
+    private cdr: ChangeDetectorRef
+  ) {}
 
   ngOnInit() {}
 
   ngOnChanges() {
     Object.assign(this.formData, this.data);
+    this.headers = this.service.extractHeaders(this.data.content);
     this.input$
       .pipe(
         debounceTime(350),
@@ -32,6 +44,8 @@ export class DocumentComponent implements OnInit, OnChanges {
       )
       .subscribe((saved: any) => {
         this.data.content = saved.content;
+        this.headers = this.service.extractHeaders(this.data.content);
+        this.cdr.detectChanges();
       });
   }
 

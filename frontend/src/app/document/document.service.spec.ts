@@ -44,4 +44,20 @@ describe("DocumentService", () => {
     expect(service.countLines("First")).toBe(1);
     expect(service.countLines("Frist\nSecond")).toBe(2);
   });
+
+  it("should extract headers", () => {
+    const service: DocumentService = TestBed.get(DocumentService);
+    expect(service.extractHeaders("## Heading")).toContain("Heading");
+    const matcher = expect(
+      service.extractHeaders(`
+    ## Heading
+    ### Heading h3
+    #### Heading h4
+    `)
+    );
+
+    matcher.toContain("Heading");
+    matcher.toContain("Heading h3");
+    matcher.toContain("Heading h4");
+  });
 });
