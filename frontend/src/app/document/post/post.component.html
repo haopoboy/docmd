@@ -1,5 +1,5 @@
 <ngx-monaco-diff-editor [options]="options" [originalModel]="originalModel" [modifiedModel]="modifiedModel"
-  style="height: 85vh;">
+  style="height: 85vh;" (change)="onEditorChange($event)">
 </ngx-monaco-diff-editor>
 <button mat-fab color="primary" class="app-fixed-right" (click)="publish()" matTooltip="Publish">
   <mat-icon color="accent">publish</mat-icon>

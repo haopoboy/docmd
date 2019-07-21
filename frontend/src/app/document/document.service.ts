@@ -34,11 +34,18 @@ export class DocumentService {
   }
 
   publish(doc = new Doc()): Observable<any> {
-    return this.http.post(`${environment.apiBaseUri}/v1/post`, doc);
+    return this.http.post(`${environment.apiBaseUri}/v1/post`, {
+      documentId: doc.uuid,
+      content: doc.content
+    });
   }
 
   findPostById(id: string): Observable<any> {
-    return this.http.get(`${environment.apiBaseUri}/v1/post/${id}`);
+    return this.http.get(
+      `${
+        environment.apiBaseUri
+      }/v1/posts?documentId=${id}&size=1&sort=creationTimestamp,desc`
+    );
   }
 
   getHeader(content = ""): string {

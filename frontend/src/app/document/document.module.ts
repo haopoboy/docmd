@@ -19,13 +19,15 @@ import { DocumentComponent } from "./document/document.component";
 import { DocumentsComponent } from "./documents/documents.component";
 import { ExpansionComponent } from "./expansion/expansion.component";
 import { PostComponent } from "./post/post.component";
+import { ReleaseComponent } from "./release/release.component";
 
 @NgModule({
   declarations: [
     DocumentsComponent,
     DocumentComponent,
     ExpansionComponent,
-    PostComponent
+    PostComponent,
+    ReleaseComponent
   ],
   imports: [
     CommonModule,

@@ -1,0 +1,9 @@
+<div fxFlex fxLayout="row" fxLayoutGap="15px">
+  <mat-card>
+    <h2>Outline</h2>
+    <mat-card-content fxLayout="column">
+      <a *ngFor="let header of headers">{{header}}</a>
+    </mat-card-content>
+  </mat-card>
+  <markdown [data]="data.content"></markdown>
+</div>
