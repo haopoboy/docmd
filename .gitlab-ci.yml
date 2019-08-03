@@ -5,7 +5,7 @@ npm:
     - cd frontend
   script:
     - npm install
-    - npm run build -- --prod
+    - npm run build -- --prod --base-href docmd
   artifacts:
     paths:
       - frontend/dist
@@ -22,6 +22,9 @@ gh-pages:
     - eval $(ssh-agent -s)
     - git config --global user.email "noreplay@gitlab.ci"
     - git config --global user.name "Gitlab CI"
+    - cd frontend/dist
   script:
-    - ls
-    
+    - git init
+    - git checkout --orphan gh-pages
+    - git add -A
+    - git commit -m "Build from $CI_SERVER_NAME $CI_PIPELINE_ID"
