@@ -1,6 +1,8 @@
 npm:
   stage: build
   image: node:10-alpine
+  before_script:
+    - cd frontend
   script:
     - npm install
     - npm run build -- --prod
