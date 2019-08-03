@@ -1,7 +1,5 @@
 gh-pages:
   image: alpine/git
-  dependencies:
-    - npm
   before_script:
     - ssh-add <(echo "$GIT_SSH_PRIV_KEY")
     - git config --global user.email "noreply"
