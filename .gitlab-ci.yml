@@ -1,9 +1,11 @@
+
 gh-pages:
-  image: alpine/git
+  stage: build
   before_script:
     - ssh-add <(echo "$GIT_SSH_PRIV_KEY")
     - git config --global user.email "noreply"
     - git config --global user.name "Gitlab CI"
   script:
-    - git init
+    - ls
+    - git
     
