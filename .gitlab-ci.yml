@@ -1,24 +1,10 @@
-.npm: &npm
-  stage: build
+gh-pages:
+  image: alpine/git
+  dependencies:
+    - npm
   before_script:
-    - cd frontend
+    - ssh-add <(echo "$GIT_SSH_PRIV_KEY")
+    - git config --global user.email "noreply"
+    - git config --global user.name "Gitlab CI"
   script:
-    - node -v
-    - npm -v
-    - npm install
-    - npm run lint
-    - npm run build -- --prod
-
-
-# Validate frontend using Node8
-npm:node8:
-  <<: *npm
-  image: node:8-alpine
-
-# Validate frontend using Node10 just for test
-npm:node10:
-  <<: *npm
-  image: node:10-alpine
-  script:
-    - ls -al
-    
+    - git
