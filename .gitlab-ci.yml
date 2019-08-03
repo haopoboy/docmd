@@ -1,10 +1,25 @@
+npm:
+  stage: build
+  image: node:10-alpine
+  script:
+    - npm install
+    - npm run build -- --prod
+  artifacts:
+    paths:
+      - frontend/dist
+    expire_in: 1 week
+
 gh-pages:
   stage: build
+  dependencies:
+    - npm
+  variables:
+    GIT_STRATEGY: none
   before_script:
     - 'which ssh-agent || ( apt-get update -y && apt-get install openssh-client -y )'
     - eval $(ssh-agent -s)
-    - git config --global user.email "noreply"
+    - git config --global user.email "noreplay@gitlab.ci"
     - git config --global user.name "Gitlab CI"
   script:
     - ls
-    - git
+    
