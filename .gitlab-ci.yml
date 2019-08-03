@@ -27,4 +27,7 @@ gh-pages:
     - git init
     - git checkout --orphan gh-pages
     - git add -A
-    - git commit -m "Build from $CI_SERVER_NAME $CI_PIPELINE_ID"
+    - git commit -m -q "Build from $CI_SERVER_NAME $CI_PIPELINE_ID"
+    - git remote add origin git@github.com:haopoboy/docmd.git
+    - git push origin gh-pages
+    
