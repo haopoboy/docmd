@@ -1,0 +1,24 @@
+.npm: &npm
+  stage: build
+  before_script:
+    - cd frontend
+  script:
+    - node -v
+    - npm -v
+    - npm install
+    - npm run lint
+    - npm run build -- --prod
+
+
+# Validate frontend using Node8
+npm:node8:
+  <<: *npm
+  image: node:8-alpine
+
+# Validate frontend using Node10 just for test
+npm:node10:
+  <<: *npm
+  image: node:10-alpine
+  script:
+    - ls -al
+    
