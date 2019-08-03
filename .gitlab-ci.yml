@@ -5,4 +5,5 @@ gh-pages:
     - git config --global user.email "noreply"
     - git config --global user.name "Gitlab CI"
   script:
-    - git
+    - git --help
+    
