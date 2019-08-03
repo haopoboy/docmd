@@ -20,6 +20,7 @@ gh-pages:
   before_script:
     - 'which ssh-agent || ( apt-get update -y && apt-get install openssh-client -y )'
     - eval $(ssh-agent -s)
+    - ssh-add <(echo "$GIT_SSH_PRIVATE_KEY")
     - git config --global user.email "noreplay@gitlab.ci"
     - git config --global user.name "Gitlab CI"
     - cd frontend/dist
