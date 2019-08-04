@@ -31,5 +31,5 @@ gh-pages:
     - git add -A
     - git commit -m "Build from $CI_SERVER_NAME $CI_PIPELINE_ID" -q
     - git remote add origin git@github.com:haopoboy/docmd.git
-    - git push origin gh-pages
+    - git push origin gh-pages --force
     
