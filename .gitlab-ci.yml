@@ -22,7 +22,7 @@ gh-pages:
     - eval $(ssh-agent -s)
     - ssh-add <(echo "$GIT_SSH_PRIVATE_KEY")
     - mkdir ~/.ssh && ssh-keyscan -H github.com >> ~/.ssh/known_hosts
-    - git config --global user.email "noreplay@gitlab.ci"
+    - git config --global user.email "noreply@gitlab.ci"
     - git config --global user.name "Gitlab CI"
     - cd frontend/dist
   script:
