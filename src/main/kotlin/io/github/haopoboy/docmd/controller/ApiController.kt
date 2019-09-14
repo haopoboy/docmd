@@ -11,11 +11,11 @@ import org.springframework.web.bind.annotation.*
 import java.util.*
 
 @RestController
-@RequestMapping(ApiV1Controller.BASE_URI)
-class ApiV1Controller {
+@RequestMapping(ApiController.BASE_URI)
+class ApiController {
 
     companion object {
-        const val BASE_URI = "/api/v1"
+        const val BASE_URI = "/api"
     }
 
     private val nameMappings: Map<String, String> = mapOf("people" to "person")
