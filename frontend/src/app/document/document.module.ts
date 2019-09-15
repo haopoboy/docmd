@@ -46,7 +46,7 @@ import { ReleaseComponent } from "./release/release.component";
     FlexLayoutModule,
     MarkdownModule.forRoot(),
     MonacoEditorModule.forRoot({
-      baseUrl: `${environment.baseHref}/assets`
+      baseUrl: "assets"
     }),
     HttpClientModule,
     environment.production
