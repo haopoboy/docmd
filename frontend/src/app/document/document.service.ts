@@ -40,9 +40,9 @@ export class DocumentService {
 
   findPostById(id: string): Observable<any> {
     return this.http.get(
-      `${
-        environment.apiBaseUri
-      }/posts?documentId=${id}&size=1&sort=creationTimestamp,desc`
+      `${environment.apiBaseUri}/posts?documentId=${id}${
+        environment.production ? "&size=1&sort=creationTimestamp,desc" : ""
+      }`
     );
   }
 
