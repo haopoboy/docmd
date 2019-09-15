@@ -10,7 +10,7 @@ export class InMemoryDbServiceImpl implements InMemoryDbService {
     documents.forEach(element => this.initData(element));
     const document = documents;
 
-    const posts = [{ id: 1, documentId: 1, content: "Hello" }];
+    const posts = [{ id: 1, documentId: 1, content: "## Hello" }];
     const post = posts;
     return { document, documents, post, posts };
   }

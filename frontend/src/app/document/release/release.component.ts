@@ -1,6 +1,6 @@
-import { Component, OnInit, Input } from "@angular/core";
+import { Component, OnInit } from "@angular/core";
 import { ActivatedRoute } from "@angular/router";
-import { DocumentService, Doc } from "../document.service";
+import { Doc, DocumentService } from "../document.service";
 
 @Component({
   selector: "app-release",
@@ -18,9 +18,9 @@ export class ReleaseComponent implements OnInit {
   ngOnInit() {}
 
   async findOne(id) {
-    const posts: any = this.service.findPostById(id).toPromise();
-    if (posts.length > 0) {
-      this.data = posts[0];
+    const page: any = await this.service.findPostById(id).toPromise();
+    if (page.content.length > 0) {
+      this.data = page.content[0];
     } else {
       this.data = new Doc("", "## OOPS");
     }
