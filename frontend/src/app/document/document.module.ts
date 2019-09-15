@@ -15,6 +15,7 @@ import {
 import { HttpClientInMemoryWebApiModule } from "angular-in-memory-web-api";
 import { MarkdownModule } from "ngx-markdown";
 import { MonacoEditorModule } from "ngx-monaco-editor";
+import { environment } from "src/environments/environment";
 import { InMemoryDbServiceImpl } from "../service/in-memory-data.service";
 import { DocumentRoutingModule } from "./document-routing.module";
 import { DocumentComponent } from "./document/document.component";
@@ -22,7 +23,6 @@ import { DocumentsComponent } from "./documents/documents.component";
 import { ExpansionComponent } from "./expansion/expansion.component";
 import { PostComponent } from "./post/post.component";
 import { ReleaseComponent } from "./release/release.component";
-import { environment } from "src/environments/environment";
 
 @NgModule({
   declarations: [
@@ -45,7 +45,9 @@ import { environment } from "src/environments/environment";
     MatTooltipModule,
     FlexLayoutModule,
     MarkdownModule.forRoot(),
-    MonacoEditorModule.forRoot(),
+    MonacoEditorModule.forRoot({
+      baseUrl: `${environment.baseHref}/assets`
+    }),
     HttpClientModule,
     environment.production
       ? []
