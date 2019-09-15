@@ -16,25 +16,23 @@ export class DocumentService {
   constructor(private markdown: MarkdownService, private http: HttpClient) {}
 
   findOne(id: string): Observable<any> {
-    return this.http.get(`${environment.apiBaseUri}/v1/document/${id}`);
+    return this.http.get(`${environment.apiBaseUri}/document/${id}`);
   }
 
   findAll(): Observable<any> {
-    return this.http.get(`${environment.apiBaseUri}/v1/documents`);
+    return this.http.get(`${environment.apiBaseUri}/documents`);
   }
 
   post(doc = new Doc()): Observable<any> {
-    return this.http.post(`${environment.apiBaseUri}/v1/document`, doc);
+    return this.http.post(`${environment.apiBaseUri}/document`, doc);
   }
 
   delete(doc: Doc): Observable<any> {
-    return this.http.delete(
-      `${environment.apiBaseUri}/v1/document/${doc.uuid}`
-    );
+    return this.http.delete(`${environment.apiBaseUri}/document/${doc.uuid}`);
   }
 
   publish(doc = new Doc()): Observable<any> {
-    return this.http.post(`${environment.apiBaseUri}/v1/post`, {
+    return this.http.post(`${environment.apiBaseUri}/post`, {
       documentId: doc.uuid,
       content: doc.content
     });
@@ -42,9 +40,9 @@ export class DocumentService {
 
   findPostById(id: string): Observable<any> {
     return this.http.get(
-      `${
-        environment.apiBaseUri
-      }/v1/posts?documentId=${id}&size=1&sort=creationTimestamp,desc`
+      `${environment.apiBaseUri}/posts?documentId=${id}${
+        environment.production ? "&size=1&sort=creationTimestamp,desc" : ""
+      }`
     );
   }
 

@@ -33,7 +33,7 @@ export class PostComponent implements OnInit {
     forkJoin(this.service.findPostById(id), this.service.findOne(id)).subscribe(
       data => {
         this.originalModel = {
-          code: data[0] && data[0].content ? data[0].content[0].content : "",
+          code: data[0] && data[0].content[0] ? data[0].content[0].content : "",
           language: "markdown"
         };
 

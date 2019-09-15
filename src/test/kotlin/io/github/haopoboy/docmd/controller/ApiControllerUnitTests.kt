@@ -24,16 +24,16 @@ import org.springframework.test.web.servlet.result.MockMvcResultMatchers.status
 import java.util.*
 
 @RunWith(SpringRunner::class)
-@WebMvcTest(ApiV1Controller::class)
-class ApiV1ControllerUnitTests {
+@WebMvcTest(ApiController::class)
+class ApiControllerUnitTests {
 
-    private val baseUrl = ApiV1Controller.BASE_URI
+    private val baseUrl = ApiController.BASE_URI
 
     @Autowired
     private lateinit var mvc: MockMvc
 
     @Autowired
-    private lateinit var impl: ApiV1Controller
+    private lateinit var impl: ApiController
 
     @MockBean
     private lateinit var service: RepositoryService

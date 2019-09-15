@@ -12,14 +12,17 @@ import {
   MatMenuModule,
   MatTooltipModule
 } from "@angular/material";
+import { HttpClientInMemoryWebApiModule } from "angular-in-memory-web-api";
 import { MarkdownModule } from "ngx-markdown";
 import { MonacoEditorModule } from "ngx-monaco-editor";
+import { InMemoryDbServiceImpl } from "../service/in-memory-data.service";
 import { DocumentRoutingModule } from "./document-routing.module";
 import { DocumentComponent } from "./document/document.component";
 import { DocumentsComponent } from "./documents/documents.component";
 import { ExpansionComponent } from "./expansion/expansion.component";
 import { PostComponent } from "./post/post.component";
 import { ReleaseComponent } from "./release/release.component";
+import { environment } from "src/environments/environment";
 
 @NgModule({
   declarations: [
@@ -43,7 +46,10 @@ import { ReleaseComponent } from "./release/release.component";
     FlexLayoutModule,
     MarkdownModule.forRoot(),
     MonacoEditorModule.forRoot(),
-    HttpClientModule
+    HttpClientModule,
+    environment.production
+      ? []
+      : HttpClientInMemoryWebApiModule.forRoot(InMemoryDbServiceImpl)
   ]
 })
 export class DocumentModule {}

@@ -10,9 +10,9 @@ import org.springframework.test.context.junit4.SpringRunner
 
 @RunWith(SpringRunner::class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-class ApiV1ControllerTests {
+class ApiControllerTests {
 
-    private val baseUrl = ApiV1Controller.BASE_URI
+    private val baseUrl = ApiController.BASE_URI
 
     @Autowired
     private lateinit var testRestTemplate: TestRestTemplate
